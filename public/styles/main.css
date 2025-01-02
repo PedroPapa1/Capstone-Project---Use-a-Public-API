@@ -1,0 +1,83 @@
+:root {
+  --color-background: #000066;
+  --color-nav-background: #00004d;
+  --color-font: #ffffff;
+  --gap-xl: 32px;
+  --padding-sm: 8px;
+  --text-sm: 8px;
+  --text-md: 16px;
+  --text-lg: 24px;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", serif;
+  margin: 0;
+  background-color: var(--color-background);
+}
+
+/* #currency-exchange-section {
+  
+}
+
+#popular-conversions-section {
+} */
+
+.container {
+  max-width: 1200px;
+  height: auto;
+  margin-inline: auto;
+}
+
+.header {
+  position: sticky;
+  background-color: var(--color-nav-background);
+  height: 100px;
+  width: 100%;
+  border-bottom: 5px solid var(--color-font);
+  top: 0px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+}
+
+.header-font {
+  font-size: var(--font-md);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--color-font);
+  border-radius: 5px;
+  padding: var(--padding-sm);
+  border: 1px solid transparent;
+}
+
+.header-font:hover {
+  background-color: #ffffff15;
+}
+
+.header-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-lg);
+}
+
+.header-title {
+  font-size: var(--text-lg);
+  color: var(--color-font);
+}
+
+.logo {
+  height: 100px;
+}
