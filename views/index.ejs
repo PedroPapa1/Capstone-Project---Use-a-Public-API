@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Exchange</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,20 +16,93 @@
     <nav class="header">
       <div class="container header-container">
         <div class="header-logo">
-          <img src="images/light-logo.png" class="logo" />
+          <img src="/images/light-logo.png" class="logo" />
           <h1 class="header-title">Pedro's Exchange</h1>
         </div>
         <div class="header-link">
-          <a href="#currency-exchange-section" class="header-font">Currency Converter</a>
+          <a href="#currency-convertor-section" class="header-font">Currency Converter</a>
           <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
         </div>
       </div>
+      <section class="marquee-section">
+        <div class="marquee-container">
+          <% exchangeRates.forEach((rate) => { %>
+          <span class="marquee-text"> <%= rate %></span>
+          <% });%>
+        </div>
+      </section>
     </nav>
 
     <div class="container">
-      <section id="currency-exchange-section" class="section"></section>
+      <section id="currency-convertor-section" class="convertor-section">
+        <h1 class="convertor-title">Currency Converter</h1>
+        <div class="convertor-card">
+          <form action="/conversion" method="POST" class="form-container">
+            <div class="card-content">
+              <div class="convertor-content">
+                <div class="convertor-currency">
+                  <div class="currency-content">
+                    <label for="amount" class="currency-title">Amount</label>
+                    <input type="number" name="amount" placeholder="0.00" class="currency-input" id="amount" required />
+                  </div>
+                </div>
+
+                <div class="convertor-currency">
+                  <div class="currency-content">
+                    <label for="from" class="currency-title">From</label>
+                    <select id="conversion-from" name="from" class="currency-select">
+                      <% currencyList.forEach(currency => { %>
+                      <option 
+                        value="<%= currency.value %>" 
+                        <% if (conversionData?.conversionFrom === currency.value) { %> selected <% } %> 
+                      >
+                        <%= currency.label %>
+                      </option>
+                      <% }); %>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="switch-currency-postion">
+                  <button type="button" class="switch-currency-button" id="switch-currency">
+                    <img src="/images/arrows-left-right-thin-svgrepo-com.svg" class="arrows-logo" />
+                  </button>
+                </div>
+
+                <div class="convertor-currency">
+                  <div class="currency-content">
+                    <label for="to" class="currency-title">To</label>
+                    <select id="conversion-to" name="to" class="currency-select">
+                      <% currencyList.forEach((currency) => { %>
+                        <option 
+                          value="<%= currency.value %>" 
+                          <% if (conversionData?.conversionTo === currency.value) { %> selected <% } %> 
+                        >
+                          <%= currency.label %>
+                        </option>                      
+                    <% }); %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="convertor-button-position">
+                <button class="convertor-button" type="submit">Convert</button>
+              </div>
+            </div>
+          </form>
+
+          <div>
+            <% if (conversionData?.conversionResult) { %>
+            <p><%= conversionData.conversionResult.toFixed(2) %></p>
+            <% } %>
+          </div>
+        </div>
+      </section>
 
       <section id="popular-conversions-section" class="section"></section>
     </div>
+
+    <script type="text/javascript" src="/script.js"></script>
   </body>
 </html>

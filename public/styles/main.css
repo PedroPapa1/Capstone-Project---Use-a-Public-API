@@ -1,12 +1,22 @@
 :root {
   --color-background: #000066;
   --color-nav-background: #00004d;
+  --color-border: #d9d9d9;
+  --color-convertor-font: #131635;
   --color-font: #ffffff;
+  --color-light-blue: #008ae6;
+  --color-light-blue-hover: #1aa3ff;
+  --color-convertor-hover: #f5f3f3;
+  --color-currency-title: #595959;
+  --gap-md: 16px;
   --gap-xl: 32px;
+  --margin-md: 16px;
   --padding-sm: 8px;
+  --padding-md: 24px;
   --text-sm: 8px;
   --text-md: 16px;
   --text-lg: 24px;
+  --text-xl: 32px;
 }
 
 * {
@@ -19,12 +29,25 @@ body {
   background-color: var(--color-background);
 }
 
-/* #currency-exchange-section {
-  
+/* remove spin box https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
 }
 
-#popular-conversions-section {
-} */
+.arrows-logo {
+  width: 33px;
+  height: 30px;
+}
+
+.card-content {
+  flex-direction: column;
+}
 
 .container {
   max-width: 1200px;
@@ -32,24 +55,133 @@ body {
   margin-inline: auto;
 }
 
+.convertor-button {
+  background-color: var(--color-light-blue);
+  color: var(--color-font);
+  border: 1px solid;
+  border-radius: 10px;
+  width: 250px;
+  height: 50px;
+  font-size: var(--text-md);
+  font-weight: 600;
+}
+
+.convertor-button:hover {
+  background-color: var(--color-light-blue-hover);
+}
+
+.convertor-button-position {
+  display: flex;
+  justify-content: end;
+  margin-top: var(--margin-md);
+}
+
+.convertor-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-font);
+  height: 300px;
+  width: 1200px;
+  border-radius: 24px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.convertor-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-md);
+}
+
+.convertor-currency {
+  display: flex;
+  align-items: center;
+  width: 350px;
+  height: 100px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.convertor-currency:hover {
+  background-color: var(--color-convertor-hover);
+}
+
+.currency-input {
+  background-color: transparent;
+  color: var(--color-convertor-font);
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.currency-input::placeholder {
+  color: var(--color-convertor-font);
+}
+
+.convertor-title {
+  color: var(--color-font);
+  font-size: var(--text-xl);
+}
+
+.convertor-section {
+  margin-top: 128px;
+}
+
+.currency-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-md);
+  width: 300px;
+}
+
+.currency-convertor-section {
+  margin-top: 128px;
+}
+
+.currency-input {
+  color: var(--color-convertor-font);
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.currency-input::placeholder {
+  color: var(--color-convertor-font);
+}
+
+.currency-title {
+  color: var(--color-currency-title);
+  font-size: var(--text-md);
+  margin: 0px;
+}
+
+.currency-select {
+  background-color: transparent;
+  color: var(--color-convertor-font);
+  border: none;
+  outline: none;
+  font-weight: 600;
+  font-size: var(--text-md);
+}
+
+.form-container {
+  display: flex;
+}
+
 .header {
   position: sticky;
   background-color: var(--color-nav-background);
   height: 100px;
   width: 100%;
-  border-bottom: 5px solid var(--color-font);
   top: 0px;
 }
 
 .header-container {
   display: flex;
   justify-content: space-between;
-}
-
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-lg);
 }
 
 .header-font {
@@ -73,6 +205,12 @@ body {
   gap: var(--gap-lg);
 }
 
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+}
+
 .header-title {
   font-size: var(--text-lg);
   color: var(--color-font);
@@ -80,4 +218,56 @@ body {
 
 .logo {
   height: 100px;
+}
+
+.marquee-section {
+  width: 100%;
+  background-color: var(--color-font);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  padding-block: 2px;
+}
+
+.marquee-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-text {
+  white-space: nowrap;
+  font-size: var(--text-md);
+  color: var(--color-convertor-font);
+}
+
+.marquee-text::after {
+  content: "|";
+  padding-inline: 50px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.switch-currency-button {
+  border-radius: 5px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-font);
+  padding: var(--padding-sm);
+}
+
+.switch-currency-button:hover {
+  background-color: var(--color-convertor-hover);
+}
+
+.teste {
+  display: flex;
+  flex-direction: column;
 }
