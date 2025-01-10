@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Exchange</title>
-    <link rel="stylesheet" type="text/css" href="../public/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="styles/main.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,7 +16,7 @@
     <nav class="header">
       <div class="container header-container">
         <div class="header-logo">
-          <img src="../public/images/light-logo.png" class="logo" />
+          <img src="images/light-logo.png" class="logo" />
           <h1 class="header-title">Pedro's Exchange</h1>
         </div>
         <div class="header-link">
@@ -24,6 +24,14 @@
           <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
         </div>
       </div>
+
+      <section class="marquee-section">
+        <div class="marquee-container">
+          <% exchangeRates.forEach((rate) => { %>
+          <span class="marquee-text"> <%= rate %></span>
+          <% });%>
+        </div>
+      </section>
     </nav>
 
     <div class="container">
