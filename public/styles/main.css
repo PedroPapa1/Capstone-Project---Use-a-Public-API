@@ -1,12 +1,22 @@
 :root {
   --color-background: #000066;
   --color-nav-background: #00004d;
+  --color-border: #d9d9d9;
+  --color-convertor-font: #131635;
   --color-font: #ffffff;
+  --color-light-blue: #008ae6;
+  --color-light-blue-hover: #1aa3ff;
+  --color-convertor-hover: #f5f3f3;
+  --color-currency-title: #595959;
+  --gap-md: 16px;
   --gap-xl: 32px;
+  --margin-md: 16px;
   --padding-sm: 8px;
+  --padding-md: 24px;
   --text-sm: 8px;
   --text-md: 16px;
   --text-lg: 24px;
+  --text-xl: 32px;
 }
 
 * {
@@ -17,6 +27,17 @@ body {
   font-family: "Inter", serif;
   margin: 0;
   background-color: var(--color-background);
+}
+
+/* remove spin box https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: none;
+  -moz-appearance: textfield;
 }
 
 .container {
