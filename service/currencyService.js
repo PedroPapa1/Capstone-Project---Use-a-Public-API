@@ -1,19 +1,12 @@
-import express from "express";
-import axios from "axios";
-import bodyParser from "body-parser";
+import axios, { all } from "axios";
 
-const app = express();
-const port = 3000;
-
-const API_URL = "http://api.currencylayer.com";
-const API_KEY = "0d402cae541b11d6ba5af58cc9f8585b";
+const API_URL = "http://api.currencylayer.com/";
+const API_KEY = "742c4de70e76d2d66101128577085452";
 const TOP_CURRENCIES = ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY", "BRL"];
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
+let allCurrencies;
 
-app.get("/", async (req, res) => {
-  const sourceCurrency = req.params.currency;
+export async function getTopExchangeRates(sourceCurrency) {
   const topCurrencies = TOP_CURRENCIES.filter((topCurrency) => topCurrency !== sourceCurrency).join(",");
 
   const exchangeRatesResponse = await axios.get(`${API_URL}/live`, {
@@ -29,9 +22,5 @@ app.get("/", async (req, res) => {
     return `${formattedKey}: ${value}`;
   });
 
-  res.render("index.ejs", { exchangeRates });
-});
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+  return exchangeRates;
+}
