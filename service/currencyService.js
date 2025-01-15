@@ -1,7 +1,7 @@
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "742c4de70e76d2d66101128577085452";
+const API_KEY = "dca8555dc1c78ed91f1e47436dd4a1a1";
 const TOP_CURRENCIES = ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY", "BRL"];
 
 let allCurrencies;
@@ -34,8 +34,6 @@ export async function getConversionResponse({ from, to, amount }) {
       amount,
     },
   });
-
-  console.log(`Teste: ${JSON.stringify(conversionResponse.data)}`);
 
   const conversionData = {
     conversionFrom: conversionResponse.data.query.from,

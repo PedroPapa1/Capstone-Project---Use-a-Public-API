@@ -37,66 +37,78 @@
       <section id="currency-convertor-section" class="convertor-section">
         <h1 class="convertor-title">Currency Converter</h1>
         <div class="convertor-card">
-          <form action="/conversion" method="POST" class="form-container">
-            <div class="card-content">
-              <div class="convertor-content">
-                <div class="convertor-currency">
-                  <div class="currency-content">
-                    <label for="amount" class="currency-title">Amount</label>
-                    <input type="number" name="amount" placeholder="0.00" class="currency-input" id="amount" required />
-                  </div>
+          <form action="/conversion" method="POST" class="convertor-form">
+            <div class="convertor-content">
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="amount" class="currency-title">Amount</label>
+                  <input type="number" name="amount" placeholder="0.00" class="currency-input" id="amount" required />
                 </div>
+              </div>
 
-                <div class="convertor-currency">
-                  <div class="currency-content">
-                    <label for="from" class="currency-title">From</label>
-                    <select id="conversion-from" name="from" class="currency-select">
-                      <% currencyList.forEach(currency => { %>
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="from" class="currency-title">From</label>
+                  <select id="conversion-from" name="from" class="currency-select">
+                    <% currencyList.forEach(currency => { %>
+                    <option 
+                      value="<%= currency.value %>" 
+                      <% if (conversionData?.conversionFrom === currency.value) { %> selected <% } %> 
+                    >
+                      <%= currency.label %>
+                    </option>
+                    <% }); %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="switch-currency-postion">
+                <button type="button" class="switch-currency-button" id="switch-currency">
+                  <img src="/images/arrows-left-right-thin-svgrepo-com.svg" class="arrows-logo" />
+                </button>
+              </div>
+
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="to" class="currency-title">To</label>
+                  <select id="conversion-to" name="to" class="currency-select">
+                    <% currencyList.forEach((currency) => { %>
                       <option 
                         value="<%= currency.value %>" 
-                        <% if (conversionData?.conversionFrom === currency.value) { %> selected <% } %> 
+                        <% if (conversionData?.conversionTo === currency.value) { %> selected <% } %> 
                       >
                         <%= currency.label %>
-                      </option>
-                      <% }); %>
-                    </select>
-                  </div>
+                      </option>                      
+                  <% }); %>
+                  </select>
                 </div>
-
-                <div class="switch-currency-postion">
-                  <button type="button" class="switch-currency-button" id="switch-currency">
-                    <img src="/images/arrows-left-right-thin-svgrepo-com.svg" class="arrows-logo" />
-                  </button>
-                </div>
-
-                <div class="convertor-currency">
-                  <div class="currency-content">
-                    <label for="to" class="currency-title">To</label>
-                    <select id="conversion-to" name="to" class="currency-select">
-                      <% currencyList.forEach((currency) => { %>
-                        <option 
-                          value="<%= currency.value %>" 
-                          <% if (conversionData?.conversionTo === currency.value) { %> selected <% } %> 
-                        >
-                          <%= currency.label %>
-                        </option>                      
-                    <% }); %>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="convertor-button-position">
-                <button class="convertor-button" type="submit">Convert</button>
               </div>
             </div>
-          </form>
 
-          <div>
-            <% if (conversionData?.conversionResult) { %>
-            <p><%= conversionData.conversionResult.toFixed(2) %></p>
-            <% } %>
-          </div>
+            <div class="convertor-result-content">
+              <div class="convertor-result">
+                <% if (conversionData?.conversionResult) { %>
+                  <p class="convertor-result-amount">
+                    <%= conversionData.conversionAmount.toFixed(3) %>
+                    <% currencyList.forEach((currency) => {  %>
+                      <% if (conversionData?.conversionFrom === currency.value) { %>
+                        <%= currency.label %>
+                      <% } %>
+                    <% }); %> =
+                  </p>
+                  <p class="convertor-result-text">
+                    <%= conversionData.conversionResult.toFixed(3) %>
+                    <% currencyList.forEach((currency) => {  %>
+                      <% if (conversionData?.conversionTo === currency.value) { %>
+                        <%= currency.label %>
+                      <% } %>
+                    <% }); %> =
+                  </p>
+                <% } %>
+              </div>
+                <button class="convertor-button" type="submit">Convert</button>
+            </div>
+          </form>
         </div>
       </section>
 
