@@ -57,7 +57,7 @@ export async function getCurrencies() {
   });
 
   allCurrencies = Object.entries(currencyResponse.data.currencies).map(([key, value]) => {
-    const label = `${key} • ${value}`;
+    const label = `${key} · ${value}`;
     return { value: key, label };
   });
 

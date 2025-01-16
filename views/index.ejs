@@ -88,21 +88,17 @@
             <div class="convertor-result-content">
               <div class="convertor-result">
                 <% if (conversionData?.conversionResult) { %>
-                  <p class="convertor-result-amount">
+                  <p class="convertor-result-from-amount">
                     <%= conversionData.conversionAmount.toFixed(3) %>
-                    <% currencyList.forEach((currency) => {  %>
-                      <% if (conversionData?.conversionFrom === currency.value) { %>
-                        <%= currency.label %>
-                      <% } %>
-                    <% }); %> =
+                    <span class="convertor-result-from-label">
+                      <%= currencyList.find(currency => conversionData.conversionFrom === currency.value).label %> =
+                    </span>
                   </p>
-                  <p class="convertor-result-text">
+                  <p class="convertor-result-to-amount">
                     <%= conversionData.conversionResult.toFixed(3) %>
-                    <% currencyList.forEach((currency) => {  %>
-                      <% if (conversionData?.conversionTo === currency.value) { %>
-                        <%= currency.label %>
-                      <% } %>
-                    <% }); %> =
+                    <span class="convertor-result-to-label">
+                      <%= currencyList.find(currency => conversionData.conversionTo === currency.value).label %> 
+                    </span>
                   </p>
                 <% } %>
               </div>
