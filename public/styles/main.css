@@ -8,6 +8,7 @@
   --color-light-blue-hover: #1aa3ff;
   --color-convertor-hover: #f5f3f3;
   --color-currency-title: #595959;
+  --color-nav-hover: #ffffff15;
   --gap-md: 16px;
   --gap-lg: 32px;
   --space-xs: 4px;
@@ -205,6 +206,13 @@ input[type="number"] {
 .header-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.header-content {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
 }
 
 .header-font {
@@ -218,7 +226,7 @@ input[type="number"] {
 }
 
 .header-font:hover {
-  background-color: #ffffff15;
+  background-color: var(--color-nav-hover);
 }
 
 .header-link {
@@ -241,6 +249,22 @@ input[type="number"] {
 
 .logo {
   height: 100px;
+}
+
+.main-currency-options {
+  color: var(--color-convertor-font);
+  cursor: pointer;
+}
+
+.main-currency-select {
+  background-color: var(--color-font);
+  font-size: var(--font-md);
+  font-weight: 500;
+  color: var(--color-convertor-font);
+  border-radius: 5px;
+  padding: var(--space-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
 .marquee-section {

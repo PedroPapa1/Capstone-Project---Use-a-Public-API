@@ -19,11 +19,27 @@
           <img src="/images/light-logo.png" class="logo" />
           <h1 class="header-title">Pedro's Exchange</h1>
         </div>
-        <div class="header-link">
-          <a href="#currency-convertor-section" class="header-font">Currency Converter</a>
-          <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
+
+        <div class="header-content">
+          <div class="header-link">
+            <a href="#currency-convertor-section" class="header-font">Currency Converter</a>
+            <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
+          </div>
+          <div class="main-currency">
+            <select id="main-currency" name="currencies" class="main-currency-select">
+              <% currencyList.forEach((currency) => { %>
+                <option 
+                  value="<%= currency.value %>"
+                  class="main-currency-options"
+                >
+                  <%= currency.value %>
+                </option>
+              <% }); %>
+            </select>
+          </div>
         </div>
       </div>
+
       <section class="marquee-section">
         <div class="marquee-container">
           <% exchangeRates.forEach((rate) => { %>

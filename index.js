@@ -9,7 +9,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-  const sourceCurrency = req.params.currency;
+  const sourceCurrency = req.params.currency || "USD";
 
   const currencyList = await getCurrencies();
   const exchangeRates = await getTopExchangeRates(sourceCurrency);

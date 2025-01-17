@@ -1,6 +1,6 @@
-const myButton = document.getElementById("switch-currency");
+const switchCurrency = document.getElementById("switch-currency");
 
-myButton.addEventListener("click", () => {
+switchCurrency.addEventListener("click", () => {
   const conversionTo = document.getElementById("conversion-to");
   const conversionFrom = document.getElementById("conversion-from");
 
@@ -10,3 +10,34 @@ myButton.addEventListener("click", () => {
   conversionTo.value = newConversionTo;
   conversionFrom.value = newConversionFrom;
 });
+
+// ?currency=USD | query params | js set query params
+
+const urlParams = new URLSearchParams(window.location.search);
+const mainCurrencyParams = urlParams.get("currency");
+const mainCurrency = mainCurrencyParams || "USD";
+
+if (!mainCurrencyParams) {
+  urlParams.set("currency", mainCurrency);
+  // window.location.search = urlParams.toString();
+}
+
+console.log(`Main currency: ${mainCurrencyParams}`);
+
+const mainCurrencySelect = document.getElementById("main-currency");
+
+mainCurrencySelect.value = mainCurrency;
+mainCurrencySelect.addEventListener("change", (event) => {
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set("currency", event.target.value);
+  window.location.search = urlParams.toString();
+});
+
+// function updateCurrencyParam(currency) {
+//   const urlParams = new URLSearchParams(window.location.search);
+
+//   urlParams.set("currency", currency);
+// }
+
+// const urlParams = new URLSearchParams(window.location.search);
+// const nameParam = urlParams.get("currency");
