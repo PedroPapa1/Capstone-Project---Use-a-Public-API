@@ -1,6 +1,11 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { getConversionResponse, getTopExchangeRates, getCurrencies } from "./service/currencyService.js";
+import {
+  getConversionResponse,
+  getTopExchangeRates,
+  getCurrencies,
+  getPopularConversions,
+} from "./service/currencyService.js";
 
 const app = express();
 const port = 3000;
@@ -13,8 +18,15 @@ app.get("/", async (req, res) => {
 
   const currencyList = await getCurrencies();
   const exchangeRates = await getTopExchangeRates(sourceCurrency);
+  const popularConversions = await getPopularConversions({ currencyList, sourceCurrency, exchangeRates });
 
-  res.render("index.ejs", { exchangeRates, conversionData: {}, currencyList });
+  res.render("index.ejs", {
+    exchangeRates,
+    conversionData: {},
+    currencyList,
+    popularConversions,
+    sourceCurrency,
+  });
 });
 
 app.post("/conversion", async (req, res) => {

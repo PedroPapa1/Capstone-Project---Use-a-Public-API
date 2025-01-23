@@ -1,8 +1,8 @@
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "d91e98f19039a31259d7603fd2290ba6";
-const TOP_CURRENCIES = ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY", "BRL"];
+const API_KEY = "833e014a389a103c2861f946d9368ef1";
+const TOP_CURRENCIES = ["USD", "EUR", "BRL", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY"];
 
 let allCurrencies;
 
@@ -19,7 +19,7 @@ export async function getTopExchangeRates(sourceCurrency) {
 
   const exchangeRates = Object.entries(exchangeRatesResponse.data.quotes).map(([key, value]) => {
     const formattedKey = `${key.slice(0, 3)} -> ${key.slice(3)}`;
-    return `${formattedKey}: ${value}`;
+    return { label: formattedKey, value };
   });
 
   return exchangeRates;
@@ -57,12 +57,33 @@ export async function getCurrencies() {
   });
 
   allCurrencies = Object.entries(currencyResponse.data.currencies).map(([key, value]) => {
-    const label = `${key} · ${value}`;
-    return { value: key, label };
+    const formattedLabel = `${key} · ${value}`;
+    return { key, label: value, formattedLabel };
   });
 
   // free tier of currencylayer API only allows for one request per second.
   return new Promise((resolve) => {
     setTimeout(() => resolve(allCurrencies), 1000);
   });
+}
+
+export async function getPopularConversions({ currencyList, sourceCurrency, exchangeRates }) {
+  const popularConversions = TOP_CURRENCIES.filter((currency) => currency !== sourceCurrency).map((currency) => {
+    const conversionRate = exchangeRates.find((rate) => rate.label === `${sourceCurrency} -> ${currency}`);
+
+    const currencyToSourceConversion = 1 / conversionRate.value;
+
+    const sourceToCurrency = `${currency} 1.00 = ${conversionRate.value.toFixed(2)} ${sourceCurrency}`;
+    const currencyToSource = `${currency} ${currencyToSourceConversion.toFixed(2)} -> 1.00  ${sourceCurrency}`;
+
+    const currencyCompleteName = currencyList.find((currencyName) => currencyName.key === currency);
+
+    return {
+      value: currencyCompleteName.label,
+      sourceToCurrency,
+      currencyToSource,
+    };
+  });
+
+  return popularConversions;
 }

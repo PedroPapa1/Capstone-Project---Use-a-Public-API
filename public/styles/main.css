@@ -48,6 +48,21 @@ input[type="number"] {
   height: 30px;
 }
 
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-font);
+  border-radius: 24px;
+  padding: var(--space-lg);
+  width: 100%;
+}
+
+.cards-title {
+  color: var(--color-font);
+  font-size: var(--text-xl);
+}
+
 .container {
   max-width: 1200px;
   height: auto;
@@ -69,16 +84,6 @@ input[type="number"] {
 .convertor-button:hover {
   background-color: var(--color-light-blue-hover);
   cursor: pointer;
-}
-
-.convertor-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--color-font);
-  border-radius: 24px;
-  padding: var(--space-lg);
-  width: 100%;
 }
 
 .convertor-content {
@@ -143,15 +148,6 @@ input[type="number"] {
   padding-left: var(--space-xs);
 }
 
-.convertor-section {
-  margin-top: 128px;
-}
-
-.convertor-title {
-  color: var(--color-font);
-  font-size: var(--text-xl);
-}
-
 .currency-content {
   display: flex;
   flex-direction: column;
@@ -193,6 +189,18 @@ input[type="number"] {
   padding-top: 4px;
   padding-bottom: 3px;
   cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 0.8fr;
+  gap: var(--gap-sm);
+}
+
+.grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
 }
 
 .header {
@@ -301,6 +309,15 @@ input[type="number"] {
   100% {
     transform: translateX(-100%);
   }
+}
+
+.popular-conversion-text {
+  color: var(--color-currency-title);
+  font-size: var(--text-md);
+}
+
+.sections-space {
+  margin-top: 128px;
 }
 
 .switch-currency-button {

@@ -29,10 +29,10 @@
             <select id="main-currency" name="currencies" class="main-currency-select">
               <% currencyList.forEach((currency) => { %>
                 <option 
-                  value="<%= currency.value %>"
+                  value="<%= currency.key %>"
                   class="main-currency-options"
                 >
-                  <%= currency.value %>
+                  <%= currency.key %>
                 </option>
               <% }); %>
             </select>
@@ -43,16 +43,16 @@
       <section class="marquee-section">
         <div class="marquee-container">
           <% exchangeRates.forEach((rate) => { %>
-          <span class="marquee-text"> <%= rate %></span>
+          <span class="marquee-text"> <%= `${rate.label}: ${rate.value}` %></span>
           <% });%>
         </div>
       </section>
     </nav>
 
     <div class="container">
-      <section id="currency-convertor-section" class="convertor-section">
-        <h1 class="convertor-title">Currency Converter</h1>
-        <div class="convertor-card">
+      <section id="currency-convertor-section" class="sections-space">
+        <h1 class="cards-title">Currency Converter</h1>
+        <div class="card">
           <form action="/conversion" method="POST" class="convertor-form">
             <div class="convertor-content">
               <div class="convertor-currency">
@@ -68,10 +68,10 @@
                   <select id="conversion-from" name="from" class="currency-select">
                     <% currencyList.forEach(currency => { %>
                     <option 
-                      value="<%= currency.value %>" 
-                      <% if (conversionData?.conversionFrom === currency.value) { %> selected <% } %> 
+                      value="<%= currency.key %>" 
+                      <% if (conversionData?.conversionFrom === currency.key) { %> selected <% } %> 
                     >
-                      <%= currency.label %>
+                      <%= currency.formattedLabel %>
                     </option>
                     <% }); %>
                   </select>
@@ -90,10 +90,10 @@
                   <select id="conversion-to" name="to" class="currency-select">
                     <% currencyList.forEach((currency) => { %>
                       <option 
-                        value="<%= currency.value %>" 
-                        <% if (conversionData?.conversionTo === currency.value) { %> selected <% } %> 
+                        value="<%= currency.key %>" 
+                        <% if (conversionData?.conversionTo === currency.key) { %> selected <% } %> 
                       >
-                        <%= currency.label %>
+                        <%= currency.formattedLabel %>
                       </option>                      
                   <% }); %>
                   </select>
@@ -107,13 +107,13 @@
                   <p class="convertor-result-from-amount">
                     <%= conversionData.conversionAmount.toFixed(3) %>
                     <span class="convertor-result-from-label">
-                      <%= currencyList.find(currency => conversionData.conversionFrom === currency.value).label %> =
+                      <%= currencyList.find(currency => conversionData.conversionFrom === currency.key).formattedLabel %> =
                     </span>
                   </p>
                   <p class="convertor-result-to-amount">
                     <%= conversionData.conversionResult.toFixed(3) %>
                     <span class="convertor-result-to-label">
-                      <%= currencyList.find(currency => conversionData.conversionTo === currency.value).label %> 
+                      <%= currencyList.find(currency => conversionData.conversionTo === currency.key).formattedLabel %> 
                     </span>
                   </p>
                 <% } %>
@@ -124,7 +124,18 @@
         </div>
       </section>
 
-      <section id="popular-conversions-section" class="section"></section>
+      <section id="popular-conversions-section" class="sections-space">
+        <h1 class="cards-title">Popular Conversions</h1>
+        <div class="card grid-container">
+          <% popularConversions.forEach(popularConversion => { %>
+            <div class="grid-item">
+              <p class="popular-conversion-text"><%= popularConversion.value%></p>
+              <p class="popular-conversion-text"><%= popularConversion.sourceToCurrency %></p> 
+              <p class="popular-conversion-text"><%= popularConversion.currencyToSource %></p> 
+            </div>
+          <% }) %>
+        </div>
+      </section>
     </div>
 
     <script type="text/javascript" src="/script.js"></script>
