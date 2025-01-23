@@ -19,7 +19,7 @@ const mainCurrency = mainCurrencyParams || "USD";
 
 if (!mainCurrencyParams) {
   urlParams.set("currency", mainCurrency);
-  // window.location.search = urlParams.toString();
+  window.history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
 }
 
 console.log(`Main currency: ${mainCurrencyParams}`);
