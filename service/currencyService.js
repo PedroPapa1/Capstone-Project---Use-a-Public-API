@@ -1,7 +1,7 @@
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "d91e98f19039a31259d7603fd2290ba6";
+const API_KEY = "b8a0ef85d738606a1f564224520a8ca2";
 const TOP_CURRENCIES = ["USD", "EUR", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY", "BRL"];
 
 let allCurrencies;
