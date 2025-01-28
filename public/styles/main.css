@@ -103,6 +103,7 @@ input[type="number"] {
   box-sizing: border-box;
   position: relative;
   padding-block: 2px;
+  box-shadow: 5px 2px 2px black;
 }
 
 .marquee-container {
