@@ -15,8 +15,7 @@ app.get("/", async (req, res) => {
 
     res.render("index.ejs", { exchangeRates });
   } catch (error) {
-    console.error("Error fetching exchange rates:", error);
-    res.status(404).send(error.message);
+    res.status(500).send(error.message);
   }
 });
 

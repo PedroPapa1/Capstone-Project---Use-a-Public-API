@@ -24,5 +24,6 @@ export async function getTopExchangeRates(sourceCurrency) {
     return exchangeRates;
   } catch (error) {
     console.log(`Error fetching exchange rates:${error}`);
+    throw new Error("Unable to get exchange rates, please try again later.");
   }
 }
