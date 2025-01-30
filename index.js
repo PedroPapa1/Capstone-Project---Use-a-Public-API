@@ -14,33 +14,39 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
-  const sourceCurrency = req.params.currency || "USD";
+  const sourceCurrency = req.query.currency || "USD";
 
-  const currencyList = await getCurrencies();
-  const exchangeRates = await getTopExchangeRates(sourceCurrency);
-  const popularConversions = await getPopularConversions({ currencyList, sourceCurrency, exchangeRates });
+  try {
+    const currencyList = await getCurrencies();
+    const exchangeRates = await getTopExchangeRates(sourceCurrency);
+    const popularConversions = await getPopularConversions({ currencyList, sourceCurrency, exchangeRates });
 
-  res.render("index.ejs", {
-    exchangeRates,
-    conversionData: {},
-    currencyList,
-    popularConversions,
-    sourceCurrency,
-  });
+    res.render("index.ejs", {
+      exchangeRates,
+      conversionData: {},
+      currencyList,
+      popularConversions,
+      sourceCurrency,
+    });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 app.post("/conversion", async (req, res) => {
-  const sourceCurrency = req.params.currency;
+  const sourceCurrency = req.query.currency || "USD";
   const { from, to, amount } = req.body;
 
-  const currencyList = await getCurrencies();
-  const exchangeRates = await getTopExchangeRates(sourceCurrency);
-
-  // free tier of currencylayer API only allows for one request per second.
-  setTimeout(async () => {
+  try {
+    const currencyList = await getCurrencies();
+    const exchangeRates = await getTopExchangeRates(sourceCurrency);
+    const popularConversions = await getPopularConversions({ currencyList, sourceCurrency, exchangeRates });
     const conversionData = await getConversionResponse({ from, to, amount });
-    res.render("index.ejs", { exchangeRates, conversionData, currencyList });
-  }, 1000);
+
+    res.render("index.ejs", { exchangeRates, conversionData, currencyList, popularConversions, sourceCurrency });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 });
 
 app.listen(port, () => {

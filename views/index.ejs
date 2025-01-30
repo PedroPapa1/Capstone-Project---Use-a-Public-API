@@ -11,7 +11,9 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <body>
     <nav class="header">
       <div class="container header-container">
@@ -53,7 +55,7 @@
       <section id="currency-convertor-section" class="sections-space">
         <h1 class="cards-title">Currency Converter</h1>
         <div class="card">
-          <form action="/conversion" method="POST" class="convertor-form">
+          <form action="/conversion?currency=<%= sourceCurrency %>" method="POST" class="convertor-form">
             <div class="convertor-content">
               <div class="convertor-currency">
                 <div class="currency-content">
@@ -67,12 +69,12 @@
                   <label for="from" class="currency-title">From</label>
                   <select id="conversion-from" name="from" class="currency-select">
                     <% currencyList.forEach(currency => { %>
-                    <option 
-                      value="<%= currency.key %>" 
-                      <% if (conversionData?.conversionFrom === currency.key) { %> selected <% } %> 
-                    >
-                      <%= currency.formattedLabel %>
-                    </option>
+                      <option 
+                        value="<%= currency.key %>" 
+                        <% if (conversionData?.conversionFrom === currency.key) { %> selected <% } %> 
+                      >
+                        <%= currency.formattedLabel %>
+                      </option>
                     <% }); %>
                   </select>
                 </div>
@@ -94,7 +96,7 @@
                         <% if (conversionData?.conversionTo === currency.key) { %> selected <% } %> 
                       >
                         <%= currency.formattedLabel %>
-                      </option>                      
+                      </option>
                   <% }); %>
                   </select>
                 </div>
@@ -118,7 +120,7 @@
                   </p>
                 <% } %>
               </div>
-                <button class="convertor-button" type="submit">Convert</button>
+              <button class="convertor-button" type="submit">Convert</button>
             </div>
           </form>
         </div>
