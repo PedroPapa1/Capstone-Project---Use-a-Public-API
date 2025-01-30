@@ -1,3 +1,25 @@
+const urlParams = new URLSearchParams(window.location.search);
+console.log(`URLParams: ${JSON.stringify(urlParams)}`);
+const mainCurrencyParams = urlParams.get("currency");
+const mainCurrency = mainCurrencyParams || "USD";
+
+if (!mainCurrencyParams) {
+  urlParams.set("currency", mainCurrency);
+  window.history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
+}
+
+console.log(`Main currency: ${mainCurrencyParams}`);
+
+const mainCurrencySelect = document.getElementById("main-currency");
+console.log(`TESTE: ${window.location.host}`);
+
+mainCurrencySelect.value = mainCurrency;
+mainCurrencySelect.addEventListener("change", (event) => {
+  const urlParams = new URLSearchParams();
+  urlParams.set("currency", event.target.value);
+  window.location.replace(`${window.location.origin}?${urlParams.toString()}`);
+});
+
 const myButton = document.getElementById("switch-currency");
 
 myButton.addEventListener("click", () => {
