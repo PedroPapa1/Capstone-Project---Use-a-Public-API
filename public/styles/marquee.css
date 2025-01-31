@@ -1,0 +1,36 @@
+.marquee-section {
+  width: 100%;
+  background-color: var(--color-font);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+  padding-block: 2px;
+  box-shadow: 0 1px 10px var(--color-shadow);
+}
+
+.marquee-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-text {
+  white-space: nowrap;
+  font-size: var(--text-md);
+  color: var(--color-convertor-font);
+}
+
+.marquee-text::after {
+  content: "|";
+  padding-inline: 50px;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

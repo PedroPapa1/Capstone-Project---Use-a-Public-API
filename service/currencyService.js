@@ -1,7 +1,7 @@
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "ed5458f8af25cf765e91c30a86462df3";
+const API_KEY = "cdee9be48c4231761e125ca27a7c3e07";
 const TOP_CURRENCIES = ["USD", "EUR", "BRL", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY"];
 
 let allCurrencies;
@@ -32,6 +32,32 @@ export async function getTopExchangeRates(sourceCurrency) {
   }
 }
 
+export async function getCurrencies() {
+  if (allCurrencies) {
+    return allCurrencies;
+  }
+
+  try {
+    const currencyResponse = await axios.get(`${API_URL}/list`, {
+      params: {
+        access_key: API_KEY,
+      },
+    });
+
+    allCurrencies = Object.entries(currencyResponse.data.currencies).map(([key, value]) => {
+      const formattedLabel = `${key} · ${value}`;
+      return { key, label: value, formattedLabel };
+    });
+
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(allCurrencies), 1000);
+    });
+  } catch (error) {
+    console.log(`Error to get currency list:${error}`);
+    throw new Error("Unable to get currency list, please try again later.");
+  }
+}
+
 export async function getConversionResponse({ from, to, amount }) {
   try {
     const conversionResponse = await axios.get(`${API_URL}/convert`, {
@@ -59,32 +85,6 @@ export async function getConversionResponse({ from, to, amount }) {
   }
 }
 
-export async function getCurrencies() {
-  if (allCurrencies) {
-    return allCurrencies;
-  }
-
-  try {
-    const currencyResponse = await axios.get(`${API_URL}/list`, {
-      params: {
-        access_key: API_KEY,
-      },
-    });
-
-    allCurrencies = Object.entries(currencyResponse.data.currencies).map(([key, value]) => {
-      const formattedLabel = `${key} · ${value}`;
-      return { key, label: value, formattedLabel };
-    });
-
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(allCurrencies), 1000);
-    });
-  } catch (error) {
-    console.log(`Error to get currency list:${error}`);
-    throw new Error("Unable to get currency list, please try again later.");
-  }
-}
-
 export async function getPopularConversions({ currencyList, exchangeRates, sourceCurrency }) {
   try {
     const popularConversions = TOP_CURRENCIES.filter((currency) => currency !== sourceCurrency).map((currency) => {
@@ -92,8 +92,8 @@ export async function getPopularConversions({ currencyList, exchangeRates, sourc
 
       const currencyToSourceConversion = 1 / conversionRate.value;
 
-      const sourceToCurrency = `${currency} 1.0000 = ${sourceCurrency} ${conversionRate.value.toFixed(4)}`;
-      const currencyToSource = `${currency} ${currencyToSourceConversion.toFixed(4)} =  ${sourceCurrency} 1.0000`;
+      const sourceToCurrency = `${currency} ${conversionRate.value.toFixed(4)} = ${sourceCurrency} 1.0000`;
+      const currencyToSource = `${currency} 1.0000 =  ${sourceCurrency} ${currencyToSourceConversion.toFixed(4)} `;
 
       const currencyCompleteName = currencyList.find((currencyName) => currencyName.key === currency);
 
