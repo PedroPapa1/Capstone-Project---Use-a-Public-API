@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { getConversionResponse, getTopExchangeRates, getCurrencies } from "./service/currencyService.js";
+import { getTopExchangeRates, getCurrencies, getConversionResponse } from "./service/currencyService.js";
 
 const app = express();
 const port = 3000;

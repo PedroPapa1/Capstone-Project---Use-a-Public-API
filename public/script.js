@@ -8,10 +8,7 @@ if (!mainCurrencyParams) {
   window.history.replaceState(null, "", `${window.location.pathname}?${urlParams.toString()}`);
 }
 
-console.log(`Main currency: ${mainCurrencyParams}`);
-
 const mainCurrencySelect = document.getElementById("main-currency");
-console.log(`TESTE: ${window.location.host}`);
 
 mainCurrencySelect.value = mainCurrency;
 mainCurrencySelect.addEventListener("change", (event) => {
