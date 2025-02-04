@@ -1,0 +1,30 @@
+.copyright-position {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-lg);
+}
+
+.footer-padding {
+  padding: var(--space-xl);
+}
+
+.footer-section {
+  background-color: var(--color-font);
+  margin-top: 200px;
+}
+
+.icons-logo {
+  height: 50px;
+  width: 50px;
+}
+
+.icons-logo-git {
+  height: 55px;
+  width: 55px;
+}
