@@ -24,6 +24,14 @@
           <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
         </div>
       </div>
+
+      <section class="marquee-section">
+        <div class="marquee-container">
+          <% exchangeRates.forEach((rate) => { %>
+          <span class="marquee-text"> <%= rate %></span>
+          <% });%>
+        </div>
+      </section>
     </nav>
 
     <div class="container">
