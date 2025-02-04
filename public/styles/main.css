@@ -11,6 +11,7 @@
   --color-nav-hover: #ffffff15;
   --gap-md: 16px;
   --gap-lg: 32px;
+  --gap-xl: 128px;
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 24px;
@@ -43,8 +44,30 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-font);
+  border-radius: 24px;
+  padding: var(--space-lg);
+  width: 100%;
+}
+
+.cards-title {
+  color: var(--color-font);
+  font-size: var(--text-xl);
+}
+
 .container {
   max-width: 1200px;
   height: auto;
   margin-inline: auto;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xl);
+  padding-block: var(--gap-xl);
 }

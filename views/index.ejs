@@ -7,7 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/styles/main.css" />
     <link rel="stylesheet" type="text/css" href="/styles/header.css" />
     <link rel="stylesheet" type="text/css" href="/styles/marquee.css" />
-
+    <link rel="stylesheet" type="text/css" href="styles/currency-convertor.css" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -31,7 +32,12 @@
           <div class="main-currency">
             <select id="main-currency" name="currencies" class="main-currency-select">
               <% currencyList.forEach((currency) => { %>
-              <option value="<%= currency.key %>" class="main-currency-options"><%= currency.key %></option>
+                <option 
+                  value="<%= currency.key %>"
+                  class="main-currency-options"
+                >
+                  <%= currency.key %>
+                </option>
               <% }); %>
             </select>
           </div>
@@ -47,9 +53,85 @@
       </section>
     </nav>
 
-    <div class="container">
-      <section id="currency-convertor-section"></section>
-      <section id="popular-conversions-section"></section>
+    <div class="container main-content">
+      <section id="currency-convertor-section">
+        <h1 class="cards-title">Currency Converter</h1>
+        <div class="card">
+          <form action="/conversion?currency=<%= sourceCurrency %>" method="POST" class="convertor-form">
+            <div class="convertor-content">
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="amount" class="currency-title">Amount</label>
+                  <input type="number" name="amount" placeholder="0.00" class="currency-input" id="amount" required />
+                </div>
+              </div>
+
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="from" class="currency-title">From</label>
+                  <select id="conversion-from" name="from" class="currency-select">
+                    <% currencyList.forEach(currency => { %>
+                    <option 
+                      value="<%= currency.key %>" 
+                      <% if (sourceCurrency === currency.key) { %> selected <% } %> 
+                    >
+                      <%= currency.formattedLabel %>
+                    </option>
+                    <% }); %>
+                  </select>
+                </div>
+              </div>
+
+              <div class="switch-currency-postion">
+                <button type="button" class="switch-currency-button" id="switch-currency">
+                  <img src="/images/arrows-left-right-thin-svgrepo-com.svg" class="arrows-logo" />
+                </button>
+              </div>
+
+              <div class="convertor-currency">
+                <div class="currency-content">
+                  <label for="to" class="currency-title">To</label>
+                  <select id="conversion-to" name="to" class="currency-select">
+                    <% currencyList.forEach((currency) => { %>
+                      <option 
+                        value="<%= currency.key %>"
+                        <% if ((currency.key === "USD" && sourceCurrency !== "USD" ) || (currency.key === "EUR" && sourceCurrency === "USD")) { %>
+                          selected
+                       <% } %>
+                      >
+                        <%= currency.formattedLabel %>
+                      </option>                      
+                  <% }); %>
+                  </select>
+                </div>
+              </div>
+            </div>
+            
+            <div class="convertor-result-content">
+              <div class="convertor-result">
+                <% if (conversionData?.conversionResult) { %>
+                  <p class="convertor-result-from-amount">
+                    <%= conversionData.conversionAmount.toFixed(3) %>
+                    <span class="convertor-result-from-label">
+                      <%= currencyList.find(currency => conversionData.conversionFrom === currency.key).formattedLabel %> =
+                    </span>
+                  </p>
+                  <p class="convertor-result-to-amount">
+                    <%= conversionData.conversionResult.toFixed(3) %>
+                    <span class="convertor-result-to-label">
+                      <%= currencyList.find(currency => conversionData.conversionTo === currency.key).formattedLabel %> 
+                    </span>
+                  </p>
+                <% } %>
+              </div>
+              <button class="convertor-button" type="submit">Convert</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      <section id="popular-conversions-section" class="section"></section>
     </div>
     <script type="text/javascript" src="/script.js"></script>
   </body>

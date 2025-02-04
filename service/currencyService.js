@@ -57,3 +57,30 @@ export async function getCurrencies() {
     throw new Error("Unable to get currency list, please try again later.");
   }
 }
+
+export async function getConversionResponse({ from, to, amount }) {
+  try {
+    const conversionResponse = await axios.get(`${API_URL}/convert`, {
+      params: {
+        access_key: API_KEY,
+        from,
+        to,
+        amount,
+      },
+    });
+
+    const conversionData = {
+      conversionFrom: conversionResponse.data.query.from,
+      conversionTo: conversionResponse.data.query.to,
+      conversionAmount: conversionResponse.data.query.amount,
+      conversionResult: conversionResponse.data.result,
+    };
+
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(conversionData), 1000);
+    });
+  } catch (error) {
+    console.log(`Error to get currency convertor:${error}`);
+    throw new Error("Unable to convert the currency, please try again later.");
+  }
+}
