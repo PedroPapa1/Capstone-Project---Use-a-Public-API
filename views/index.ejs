@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Currency Exchange</title>
-    <link rel="stylesheet" type="text/css" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/header.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/marquee.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,28 +19,38 @@
     <nav class="header">
       <div class="container header-container">
         <div class="header-logo">
-          <img src="images/light-logo.png" class="logo" />
+          <img src="/images/light-logo.png" class="logo" />
           <h1 class="header-title">Pedro's Exchange</h1>
         </div>
-        <div class="header-link">
-          <a href="#currency-exchange-section" class="header-font">Currency Converter</a>
-          <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
+
+        <div class="header-content">
+          <div class="header-link">
+            <a href="#currency-convertor-section" class="header-font">Currency Converter</a>
+            <a href="#popular-conversions-section" class="header-font">Popular Conversions</a>
+          </div>
+          <div class="main-currency">
+            <select id="main-currency" name="currencies" class="main-currency-select">
+              <% currencyList.forEach((currency) => { %>
+              <option value="<%= currency.key %>" class="main-currency-options"><%= currency.key %></option>
+              <% }); %>
+            </select>
+          </div>
         </div>
       </div>
 
       <section class="marquee-section">
         <div class="marquee-container">
           <% exchangeRates.forEach((rate) => { %>
-          <span class="marquee-text"> <%= rate %></span>
+          <span class="marquee-text"> <%= `${rate.label}: ${rate.value}` %></span>
           <% });%>
         </div>
       </section>
     </nav>
 
     <div class="container">
-      <section id="currency-exchange-section" class="section"></section>
-
-      <section id="popular-conversions-section" class="section"></section>
+      <section id="currency-convertor-section"></section>
+      <section id="popular-conversions-section"></section>
     </div>
+    <script type="text/javascript" src="/script.js"></script>
   </body>
 </html>
