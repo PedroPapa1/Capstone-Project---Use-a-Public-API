@@ -17,9 +17,9 @@ mainCurrencySelect.addEventListener("change", (event) => {
   window.location.replace(`${window.location.origin}?${urlParams.toString()}`);
 });
 
-const myButton = document.getElementById("switch-currency");
+const switchCurrency = document.getElementById("switch-currency");
 
-myButton.addEventListener("click", () => {
+switchCurrency.addEventListener("click", () => {
   const conversionTo = document.getElementById("conversion-to");
   const conversionFrom = document.getElementById("conversion-from");
 

@@ -1,0 +1,33 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-sm);
+}
+
+.grid-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.grid-item:last-child {
+  border: none;
+}
+
+.popular-conversion-text {
+  color: var(--color-currency-title);
+  font-size: var(--text-md);
+  font-family: monaco, Consolas, Lucida Console, monospace;
+  text-align: center;
+}
+
+.popular-conversion-text:first-child {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  text-align: start;
+}
+
+.popular-conversion-text:last-child {
+  text-align: end;
+}

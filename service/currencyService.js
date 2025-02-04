@@ -1,8 +1,8 @@
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "ed5458f8af25cf765e91c30a86462df3";
-const TOP_CURRENCIES = ["USD", "EUR", "BRL", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY", "JPY"];
+const API_KEY = "cdee9be48c4231761e125ca27a7c3e07";
+const TOP_CURRENCIES = ["USD", "EUR", "BRL", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY"];
 
 let allCurrencies;
 
@@ -82,5 +82,33 @@ export async function getConversionResponse({ from, to, amount }) {
   } catch (error) {
     console.log(`Error to get currency convertor:${error}`);
     throw new Error("Unable to convert the currency, please try again later.");
+  }
+}
+
+export async function getPopularConversions({ currencyList, exchangeRates, sourceCurrency }) {
+  try {
+    const popularConversions = TOP_CURRENCIES.filter((currency) => currency !== sourceCurrency).map((currency) => {
+      const conversionRate = exchangeRates.find((rate) => rate.label === `${sourceCurrency} -> ${currency}`);
+
+      const currencyToSourceConversion = 1 / conversionRate.value;
+
+      const sourceToCurrency = `${currency} ${conversionRate.value.toFixed(4)} = ${sourceCurrency} 1.0000`;
+      const currencyToSource = `${currency} 1.0000 =  ${sourceCurrency} ${currencyToSourceConversion.toFixed(4)} `;
+
+      const currencyCompleteName = currencyList.find((currencyName) => currencyName.key === currency);
+
+      return {
+        value: currencyCompleteName.label,
+        sourceToCurrency,
+        currencyToSource,
+      };
+    });
+
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(popularConversions), 1000);
+    });
+  } catch (error) {
+    console.log(`Error to get popular conversions:${error}`);
+    throw new Error("Unable to get popular conversions, please try again later.");
   }
 }

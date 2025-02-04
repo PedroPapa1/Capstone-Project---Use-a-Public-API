@@ -7,15 +7,18 @@
     <link rel="stylesheet" type="text/css" href="/styles/main.css" />
     <link rel="stylesheet" type="text/css" href="/styles/header.css" />
     <link rel="stylesheet" type="text/css" href="/styles/marquee.css" />
-    <link rel="stylesheet" type="text/css" href="styles/currency-convertor.css" />
-    
+    <link rel="stylesheet" type="text/css" href="/styles/currency-convertor.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/popular-conversions.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
       rel="stylesheet"
     />
-  </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <body>
     <nav class="header">
       <div class="container header-container">
@@ -130,8 +133,18 @@
         </div>
       </section>
 
-
-      <section id="popular-conversions-section" class="section"></section>
+      <section id="popular-conversions-section">
+        <h1 class="cards-title">Popular Conversions</h1>
+        <div class="card grid-container">
+          <% popularConversions.forEach(popularConversion => { %>
+            <div class="grid-item">
+              <p class="popular-conversion-text"><%= popularConversion.value%></p>
+              <p class="popular-conversion-text"><%= popularConversion.sourceToCurrency %></p> 
+              <p class="popular-conversion-text"><%= popularConversion.currencyToSource %></p> 
+            </div>
+          <% }) %>
+        </div>
+      </section>
     </div>
     <script type="text/javascript" src="/script.js"></script>
   </body>
