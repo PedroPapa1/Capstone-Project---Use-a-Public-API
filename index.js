@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import {
@@ -8,7 +9,7 @@ import {
 } from "./service/currencyService.js";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
