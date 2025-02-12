@@ -1,7 +1,8 @@
+import "dotenv/config";
 import axios, { all } from "axios";
 
 const API_URL = "http://api.currencylayer.com/";
-const API_KEY = "cdee9be48c4231761e125ca27a7c3e07";
+const API_KEY = process.env.API_KEY;
 const TOP_CURRENCIES = ["USD", "EUR", "BRL", "JPY", "GBP", "CHF", "CAD", "AUD", "ZAR", "CNY"];
 
 let allCurrencies;
